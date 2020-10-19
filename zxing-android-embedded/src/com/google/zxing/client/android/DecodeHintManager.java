@@ -33,7 +33,6 @@ import java.util.regex.Pattern;
  */
 public final class DecodeHintManager {
 
-    private static final String TAG = DecodeHintManager.class.getSimpleName();
 
     // This pattern is used in decoding integer arrays.
     private static final Pattern COMMA = Pattern.compile(",");
@@ -182,7 +181,6 @@ public final class DecodeHintManager {
                     try {
                         array[i] = Integer.parseInt(values[i]);
                     } catch (NumberFormatException ignored) {
-                        Log.w(TAG, "Skipping array of integers hint " + hintType + " due to invalid numeric value: '" + values[i] + '\'');
                         array = null;
                         break;
                     }
@@ -192,10 +190,8 @@ public final class DecodeHintManager {
                 }
                 continue;
             }
-            Log.w(TAG, "Unsupported hint type '" + hintType + "' of type " + hintType.getValueType());
         }
 
-        Log.i(TAG, "Hints from the URI: " + hints);
         return hints;
     }
 
@@ -224,13 +220,11 @@ public final class DecodeHintManager {
                     if (hintType.getValueType().isInstance(hintData)) {
                         hints.put(hintType, hintData);
                     } else {
-                        Log.w(TAG, "Ignoring hint " + hintType + " because it is not assignable from " + hintData);
                     }
                 }
             }
         }
 
-        Log.i(TAG, "Hints from the Intent: " + hints);
         return hints;
     }
 }

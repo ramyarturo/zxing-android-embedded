@@ -21,7 +21,6 @@ import android.util.Log;
 
 public final class OpenCameraInterface {
 
-    private static final String TAG = OpenCameraInterface.class.getName();
 
     private OpenCameraInterface() {
     }
@@ -34,7 +33,6 @@ public final class OpenCameraInterface {
     public static int getCameraId(int requestedId) {
         int numCameras = Camera.getNumberOfCameras();
         if (numCameras == 0) {
-            Log.w(TAG, "No cameras!");
             return -1;
         }
 

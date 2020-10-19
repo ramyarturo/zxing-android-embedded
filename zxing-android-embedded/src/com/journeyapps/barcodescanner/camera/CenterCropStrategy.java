@@ -10,7 +10,6 @@ import com.journeyapps.barcodescanner.Size;
  * fit exactly. Aspect ratio is preserved.
  */
 public class CenterCropStrategy extends PreviewScalingStrategy {
-    private static final String TAG = CenterCropStrategy.class.getSimpleName();
 
 
     /**
@@ -68,7 +67,6 @@ public class CenterCropStrategy extends PreviewScalingStrategy {
     public Rect scalePreview(Size previewSize, Size viewfinderSize) {
         // We avoid scaling if feasible.
         Size scaledPreview = previewSize.scaleCrop(viewfinderSize);
-        Log.i(TAG, "Preview: " + previewSize + "; Scaled: " + scaledPreview + "; Want: " + viewfinderSize);
 
         int dx = (scaledPreview.width - viewfinderSize.width) / 2;
         int dy = (scaledPreview.height - viewfinderSize.height) / 2;

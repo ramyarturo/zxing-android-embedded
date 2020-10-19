@@ -87,7 +87,6 @@ public class CameraPreview extends ViewGroup {
         void cameraClosed();
     }
 
-    private static final String TAG = CameraPreview.class.getSimpleName();
 
     private CameraInstance cameraInstance;
 
@@ -185,7 +184,6 @@ public class CameraPreview extends ViewGroup {
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             if (holder == null) {
-                Log.e(TAG, "*** WARNING *** surfaceChanged() gave us a null surface!");
                 return;
             }
             currentSurfaceSize = new Size(width, height);
@@ -393,7 +391,6 @@ public class CameraPreview extends ViewGroup {
         if (previewFramingRect == null || previewFramingRect.width() <= 0 || previewFramingRect.height() <= 0) {
             previewFramingRect = null;
             framingRect = null;
-            Log.w(TAG, "Preview frame is too small");
         } else {
             fireState.previewSized();
         }
@@ -608,7 +605,6 @@ public class CameraPreview extends ViewGroup {
     public void resume() {
         // This must be safe to call multiple times
         Util.validateMainThread();
-        Log.d(TAG, "resume()");
 
         // initCamera() does nothing if called twice, but does log a warning
         initCamera();
@@ -642,7 +638,6 @@ public class CameraPreview extends ViewGroup {
     public void pause() {
         // This must be safe to call multiple times.
         Util.validateMainThread();
-        Log.d(TAG, "pause()");
 
         openedOrientation = -1;
         if (cameraInstance != null) {
@@ -750,7 +745,6 @@ public class CameraPreview extends ViewGroup {
 
     private void initCamera() {
         if (cameraInstance != null) {
-            Log.w(TAG, "initCamera called twice");
             return;
         }
 
@@ -779,7 +773,6 @@ public class CameraPreview extends ViewGroup {
 
     private void startCameraPreview(CameraSurface surface) {
         if (!previewActive && cameraInstance != null) {
-            Log.i(TAG, "Starting preview");
             cameraInstance.setSurface(surface);
             cameraInstance.startPreview();
             previewActive = true;

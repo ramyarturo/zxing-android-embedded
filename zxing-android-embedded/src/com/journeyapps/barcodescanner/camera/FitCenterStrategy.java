@@ -10,7 +10,6 @@ import com.journeyapps.barcodescanner.Size;
  * dimension of the parent. One of width or height will fit exactly. Aspect ratio is preserved.
  */
 public class FitCenterStrategy extends PreviewScalingStrategy {
-    private static final String TAG = FitCenterStrategy.class.getSimpleName();
 
 
     /**
@@ -68,7 +67,6 @@ public class FitCenterStrategy extends PreviewScalingStrategy {
     public Rect scalePreview(Size previewSize, Size viewfinderSize) {
         // We avoid scaling if feasible.
         Size scaledPreview = previewSize.scaleFit(viewfinderSize);
-        Log.i(TAG, "Preview: " + previewSize + "; Scaled: " + scaledPreview + "; Want: " + viewfinderSize);
 
         int dx = (scaledPreview.width - viewfinderSize.width) / 2;
         int dy = (scaledPreview.height - viewfinderSize.height) / 2;

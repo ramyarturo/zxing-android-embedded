@@ -33,7 +33,6 @@ import java.io.IOException;
  */
 public final class BeepManager {
 
-    private static final String TAG = BeepManager.class.getSimpleName();
 
     private static final float BEEP_VOLUME = 0.10f;
     private static final long VIBRATE_DURATION = 200L;
@@ -105,7 +104,6 @@ public final class BeepManager {
         mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.w(TAG, "Failed to beep " + what + ", " + extra);
                 // possibly media player error, so release and recreate
                 mp.stop();
                 mp.release();
@@ -124,7 +122,6 @@ public final class BeepManager {
             mediaPlayer.start();
             return mediaPlayer;
         } catch (IOException ioe) {
-            Log.w(TAG, ioe);
             mediaPlayer.release();
             return null;
         }

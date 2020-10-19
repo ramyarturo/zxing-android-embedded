@@ -9,7 +9,6 @@ import android.os.HandlerThread;
  * Any access to Camera / CameraManager should happen on this thread, through CameraInstance.
  */
 class CameraThread {
-    private static final String TAG = CameraThread.class.getSimpleName();
 
     private static CameraThread instance;
 

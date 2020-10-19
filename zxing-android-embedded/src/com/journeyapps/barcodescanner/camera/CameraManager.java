@@ -50,7 +50,6 @@ import java.util.List;
  */
 public final class CameraManager {
 
-    private static final String TAG = CameraManager.class.getSimpleName();
 
     private Camera camera;
     private Camera.CameraInfo cameraInfo;
@@ -111,11 +110,9 @@ public final class CameraManager {
                     // Could be:
                     // java.lang.RuntimeException: getParameters failed (empty parameters)
                     // IllegalArgumentException: Image data does not match the resolution
-                    Log.e(TAG, "Camera preview failed", e);
                     callback.onPreviewError(e);
                 }
             } else {
-                Log.d(TAG, "Got preview callback, but no handler or resolution available");
                 if (callback != null) {
                     // Should generally not happen
                     callback.onPreviewError(new Exception("No resolution available"));
@@ -257,14 +254,11 @@ public final class CameraManager {
 
         //noinspection ConstantConditions
         if (parameters == null) {
-            Log.w(TAG, "Device error: no camera parameters are available. Proceeding without configuration.");
             return;
         }
 
-        Log.i(TAG, "Initial camera parameters: " + parameters.flatten());
 
         if (safeMode) {
-            Log.w(TAG, "In camera config safe mode -- most settings will not be honored");
         }
 
         CameraConfigurationUtils.setFocus(parameters, settings.getFocusMode(), safeMode);
@@ -305,7 +299,6 @@ public final class CameraManager {
             CameraConfigurationUtils.setBestPreviewFPS(parameters);
         }
 
-        Log.i(TAG, "Final camera parameters: " + parameters.flatten());
 
         camera.setParameters(parameters);
     }
@@ -353,7 +346,6 @@ public final class CameraManager {
         } else {  // back-facing
             result = (cameraInfo.orientation - degrees + 360) % 360;
         }
-        Log.i(TAG, "Camera Display Orientation: " + result);
         return result;
     }
 
@@ -366,7 +358,6 @@ public final class CameraManager {
             this.rotationDegrees = calculateDisplayRotation();
             setCameraDisplayOrientation(rotationDegrees);
         } catch (Exception e) {
-            Log.w(TAG, "Failed to set rotation.");
         }
         try {
             setDesiredParameters(false);
@@ -376,7 +367,6 @@ public final class CameraManager {
                 setDesiredParameters(true);
             } catch (Exception e2) {
                 // Well, darn. Give up
-                Log.w(TAG, "Camera rejected even safe-mode parameters! No configuration");
             }
         }
 
@@ -475,7 +465,6 @@ public final class CameraManager {
                 }
             } catch(RuntimeException e) {
                 // Camera error. Could happen if the camera is being closed.
-                Log.e(TAG, "Failed to set torch", e);
             }
         }
     }
@@ -491,7 +480,6 @@ public final class CameraManager {
                 camera.setParameters(callback.changeCameraParameters(camera.getParameters()));
             } catch(RuntimeException e) {
                 // Camera error. Could happen if the camera is being closed.
-                Log.e(TAG, "Failed to change camera parameters", e);
             }
         }
     }

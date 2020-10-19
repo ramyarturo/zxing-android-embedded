@@ -8,7 +8,6 @@ import com.journeyapps.barcodescanner.Size;
  * Scales the size so that it fits exactly. Aspect ratio is NOT preserved.
  */
 public class FitXYStrategy extends PreviewScalingStrategy {
-    private static final String TAG = FitXYStrategy.class.getSimpleName();
 
 
     private static float absRatio(float ratio) {

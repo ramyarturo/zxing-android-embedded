@@ -15,7 +15,6 @@ import com.journeyapps.barcodescanner.Util;
  * All methods must be called from the main thread.
  */
 public class CameraInstance {
-    private static final String TAG = CameraInstance.class.getSimpleName();
 
     private CameraThread cameraThread;
     private CameraSurface surface;
@@ -178,7 +177,6 @@ public class CameraInstance {
     public void requestPreview(final PreviewCallback callback) {
         mainHandler.post(() -> {
             if (!open) {
-                Log.d(TAG, "Camera is closed, not requesting preview");
                 return;
             }
 
@@ -196,11 +194,9 @@ public class CameraInstance {
         @Override
         public void run() {
             try {
-                Log.d(TAG, "Opening camera");
                 cameraManager.open();
             } catch (Exception e) {
                 notifyError(e);
-                Log.e(TAG, "Failed to open camera", e);
             }
         }
     };
@@ -209,14 +205,12 @@ public class CameraInstance {
         @Override
         public void run() {
             try {
-                Log.d(TAG, "Configuring camera");
                 cameraManager.configure();
                 if (readyHandler != null) {
                     readyHandler.obtainMessage(R.id.zxing_prewiew_size_ready, getPreviewSize()).sendToTarget();
                 }
             } catch (Exception e) {
                 notifyError(e);
-                Log.e(TAG, "Failed to configure camera", e);
             }
         }
     };
@@ -225,12 +219,10 @@ public class CameraInstance {
         @Override
         public void run() {
             try {
-                Log.d(TAG, "Starting preview");
                 cameraManager.setPreviewDisplay(surface);
                 cameraManager.startPreview();
             } catch (Exception e) {
                 notifyError(e);
-                Log.e(TAG, "Failed to start preview", e);
             }
         }
     };
@@ -239,11 +231,9 @@ public class CameraInstance {
         @Override
         public void run() {
             try {
-                Log.d(TAG, "Closing camera");
                 cameraManager.stopPreview();
                 cameraManager.close();
             } catch (Exception e) {
-                Log.e(TAG, "Failed to close camera", e);
             }
 
             cameraClosed = true;

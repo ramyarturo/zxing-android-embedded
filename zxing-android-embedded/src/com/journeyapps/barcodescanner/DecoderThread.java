@@ -149,7 +149,6 @@ public class DecoderThread {
         if (rawResult != null) {
             // Don't log the barcode contents for security.
             long end = System.currentTimeMillis();
-            Log.d(TAG, "Found barcode in " + (end - start) + " ms");
             if (resultHandler != null) {
                 BarcodeResult barcodeResult = new BarcodeResult(rawResult, sourceData);
                 Message message = Message.obtain(resultHandler, R.id.zxing_decode_succeeded, barcodeResult);

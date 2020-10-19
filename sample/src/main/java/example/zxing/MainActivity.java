@@ -130,14 +130,11 @@ public class MainActivity extends AppCompatActivity {
         if(result.getContents() == null) {
             Intent originalIntent = result.getOriginalIntent();
             if (originalIntent == null) {
-                Log.d("MainActivity", "Cancelled scan");
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else if(originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
-                Log.d("MainActivity", "Cancelled scan due to missing camera permission");
                 Toast.makeText(this, "Cancelled due to missing camera permission", Toast.LENGTH_LONG).show();
             }
         } else {
-            Log.d("MainActivity", "Scanned");
             Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
         }
     }

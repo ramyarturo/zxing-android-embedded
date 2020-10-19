@@ -13,7 +13,6 @@ import java.util.List;
  *
  */
 public abstract class PreviewScalingStrategy {
-    private static final String TAG = PreviewScalingStrategy.class.getSimpleName();
 
     /**
      * Choose the best preview size, based on our viewfinder size.
@@ -33,8 +32,6 @@ public abstract class PreviewScalingStrategy {
 
         List<Size> ordered = getBestPreviewOrder(sizes, desired);
 
-        Log.i(TAG, "Viewfinder size: " + desired);
-        Log.i(TAG, "Preview in order of preference: " + ordered);
 
         return ordered.get(0);
     }

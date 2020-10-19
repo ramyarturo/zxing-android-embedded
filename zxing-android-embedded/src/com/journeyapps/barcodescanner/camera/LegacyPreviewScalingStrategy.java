@@ -13,7 +13,6 @@ import java.util.List;
  *
  */
 public class LegacyPreviewScalingStrategy extends PreviewScalingStrategy {
-    private static final String TAG = LegacyPreviewScalingStrategy.class.getSimpleName();
 
     /**
      * Choose the best preview size, based on our display size.
@@ -74,8 +73,6 @@ public class LegacyPreviewScalingStrategy extends PreviewScalingStrategy {
             }
         });
 
-        Log.i(TAG, "Viewfinder size: " + desired);
-        Log.i(TAG, "Preview in order of preference: " + sizes);
 
         return sizes.get(0);
     }
@@ -145,7 +142,6 @@ public class LegacyPreviewScalingStrategy extends PreviewScalingStrategy {
     public Rect scalePreview(Size previewSize, Size viewfinderSize) {
         // We avoid scaling if feasible.
         Size scaledPreview = scale(previewSize, viewfinderSize);
-        Log.i(TAG, "Preview: " + previewSize + "; Scaled: " + scaledPreview + "; Want: " + viewfinderSize);
 
         int dx = (scaledPreview.width - viewfinderSize.width) / 2;
         int dy = (scaledPreview.height - viewfinderSize.height) / 2;
